@@ -118,13 +118,13 @@ filter_matrix <- function(mat, col, most_common = TRUE){
   
 }
 
-
+binary_input <-example_data
 diagnosis2 <- function(binary_input){
   
   binary_matrix <- str_split_fixed(binary_input, '', nchar(binary_input[1])) %>%
     apply(2, as.numeric)
   
-  o2 <- reduce(1:nrow(binary_matrix), filter_matrix, .init = binary_matrix) %>%
+  o2 <- accumulate(1:nrow(binary_matrix), filter_matrix, .init = binary_matrix) %>%
     convert_binary()
   
   co2 <- reduce(1:nrow(binary_matrix), filter_matrix, .init = binary_matrix, most_common = FALSE) %>%
